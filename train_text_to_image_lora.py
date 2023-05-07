@@ -14,12 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # https://github.com/huggingface/diffusers/blob/main/examples/text_to_image/train_text_to_image_lora.py
+
+# Install the diffuser from source:
+# https://huggingface.co/docs/diffusers/installation#install-from-source
+# Install the datasets package following the instruction:
+# https://huggingface.co/docs/datasets/quickstart
+
 """Fine-tuning script for Stable Diffusion for text2image with support for LoRA."""
 
 import argparse
 import logging
 import math
-import os
+import os,pdb
 import random
 from pathlib import Path
 
@@ -356,6 +362,7 @@ DATASET_NAME_MAPPING = {
 def main():
     args = parse_args()
     logging_dir = os.path.join(args.output_dir, args.logging_dir)
+    print("loging_path: %s"%(os.path.abspath(logging_dir)))
 
     accelerator_project_config = ProjectConfiguration(total_limit=args.checkpoints_total_limit)
 
@@ -549,6 +556,7 @@ def main():
         caption_column = dataset_columns[1] if dataset_columns is not None else column_names[1]
     else:
         caption_column = args.caption_column
+        # pdb.set_trace()
         if caption_column not in column_names:
             raise ValueError(
                 f"--caption_column' value '{args.caption_column}' needs to be one of: {', '.join(column_names)}"
