@@ -21,10 +21,9 @@ This project is developed by Zhenhong Sun and licensed under the [Apache 2.0 lic
 ### Prerequisites
 * Linux
 * GCC 7+
-* OpenMPI 4.0+
-* Python 3.6+
-* PyTorch 1.4+
-* CUDA 10.0+
+* Python 3.9+
+* PyTorch 2.0+
+* CUDA 11.7+
 
 ### Prepare environment
 1. Compile the OpenMPI 4.0+ [Downloads](https://www.open-mpi.org/software/ompi/v4.0/). 
