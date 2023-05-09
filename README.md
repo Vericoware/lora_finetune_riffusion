@@ -1,6 +1,5 @@
 ## Introduction
 
-English | [简体中文](README_zh-CN.md)
 
 This projects aims to fine-tune the Riffusion model using LORA on 5~20 audio clips, generated from some ‘Ghibli Medley Piano’ style music. The master branch works with **Diffusers** and **Riffusion**.
 
@@ -20,67 +19,100 @@ This project is developed by Zhenhong Sun and licensed under the [Apache 2.0 lic
 
 ### Prerequisites
 * Linux
-* GCC 7+
 * Python 3.9+
 * PyTorch 2.0+
 * CUDA 11.7+
+* Pyaudio
+* Diffusser 0.9.0+
+
 
 ### Prepare environment
-1. Compile the OpenMPI 4.0+ [Downloads](https://www.open-mpi.org/software/ompi/v4.0/). 
-    ```shell
-    cd path
-    tar -xzvf openmpi-4.0.1.tar.gz
-    cd openmpi-4.0.1
-    ./configure --prefix=/your_path/openmpi
-    make && make install
-    ```
-    add the commands into your `~/.bashrc`
-    ```shell
-    export PATH=/your_path/openmpi/bin:$PATH
-    export LD_LIBRARYPATH=/your_path/openmpi/lib:$LD_LIBRARY_PATH
-    ```
-    For Ubuntu-OS
-    ```
-    sudo apt install openmpi-bin # while needed
-    conda install -c conda-forge mpi4py openmpi
-    ```
-
-2. Create a conda virtual environment and activate it.
+1. Create a conda virtual environment and activate it.
 
     ```shell
     conda create -n light-nas python=3.6 -y
     conda activate light-nas
     ```
 
-3. Install torch and torchvision with the following command or [offcial instruction](https://pytorch.org/get-started/locally/).
+2. Install torch and torchvision with the following command or [offcial instruction](https://pytorch.org/get-started/locally/).
     ```shell
-    pip install torch==1.4.0+cu100 torchvision==0.5.0+cu100 -f https://download.pytorch.org/whl/torch_stable.html
-    # or
-    pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 -f https://download.pytorch.org/whl/torch_stable.html
-    ```
-    if meet `"Not be found for jpeg"`, please install the libjpeg for the system.
-    ```shell
-    sudo yum install libjpeg # for centos
-    sudo apt install libjpeg-dev # for ubuntu
+    pip install torch==2.0.0+cu117 trochaudio==2.0.1+cu117 torchvision==0.15.1+cu117 -f https://download.pytorch.org/whl/torch_stable.html
     ```
 
-4. Install other packages with the following command.
+3. Install other packages with the following command.
 
     ```shell
     pip install -r requirements.txt
     ```
 
+4. Install Diffuser following the [official instruction](https://huggingface.co/docs/diffusers/installation#install-from-source), instead of directly installing by pip.
+
+    ```shell
+    pip install git+https://github.com/huggingface/diffusers
+    ```
 ***
 ## Easy to use
 
-* **Search with examples**
+* **Prepare raw audio files by downloading or use the `pre_process.py`, which could be saved in `datasets/raw_data`**
+    ```shell
+    python record_speaker.py
+    ```
+    Note: Any use of the musical work without proper permission may result in legal action, please follow the copyright instruction.
+* **Automatively prepare training datasets for finetuning by `riffusion` tools**
     
     ```shell
-    cd scripts/classification
-    sh example_xxxx.sh
+    cd scripts && sh predata.sh
+    # convert audio clips into spectrogram images
     ```
+* **Finetune model with official lora training script**
+    
+    ```shell
+    cd scripts && sh finetune.sh
+    # finally, save the lora weights
+    ```
+* **Generate the audio files with official lora examples**
+    
+    ```shell
+    cd scripts && sh generate.sh
+    # choose with or without lora
+    ```
+***
+## Main Results
 
+* **Original audo clips**
 
+<audio controls>
+  <source src="results/chunk_1_1_start_16998_ms_dur_5120_ms.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+* **Generated audo clip without lora, steps=50, seed=30, gudiance=7.5**
+
+<audio controls>
+  <source src="results/piano_lora0_s30_st50.wav" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+* **Generated audo clip with lora, steps=50, seed=30, gudiance=7.5**
+
+<audio controls>
+  <source src="results/piano_lora1_s30_st50.wav" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+* **Generated audo clip with lora, steps=50, seed=10, gudiance=7.5**
+
+<audio controls>
+  <source src="results/piano_lora1_s10_st50.wav" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+* **Generated audo clip without lora, steps=50, seed=100, gudiance=7.5**
+
+<audio controls>
+  <source src="results/piano_lora1_s100_st50.wav" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
 ***
 ## Main Contributors

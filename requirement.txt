@@ -1,0 +1,17 @@
+accelerate
+argh
+dacite
+demucs
+flask
+flask_cors
+numpy
+pillow>=9.1.0
+plotly
+pyaudio
+pydub
+pysoundfile
+scipy
+soundfile
+sox
+streamlit>=1.18.0
+transformers
