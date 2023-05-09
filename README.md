@@ -30,8 +30,8 @@ This project is developed by Zhenhong Sun and licensed under the [Apache 2.0 lic
 1. Create a conda virtual environment and activate it.
 
     ```shell
-    conda create -n light-nas python=3.6 -y
-    conda activate light-nas
+    conda create -n lora python=3.9 -y
+    conda activate lora
     ```
 
 2. Install torch and torchvision with the following command or [offcial instruction](https://pytorch.org/get-started/locally/).
