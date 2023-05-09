@@ -110,7 +110,7 @@ This project is developed by Zhenhong Sun and licensed under the [Apache 2.0 lic
 * **Generated audo clip without lora, steps=50, seed=100, gudiance=7.5**
 
 <audio controls>
-  <source src="results/piano_lora1_s100_st50.wav" type="audio/mpeg">
+  <source src="results/piano_lora1_s100_st50.wav" type="audio/wav">
   Your browser does not support the audio element.
 </audio>
 
