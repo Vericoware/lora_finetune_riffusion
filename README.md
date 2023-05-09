@@ -82,7 +82,7 @@ This project is developed by Zhenhong Sun and licensed under the [Apache 2.0 lic
 * **Original audo clips**
 
 <audio controls>
-  <source src="results/chunk_1_1_start_16998_ms_dur_5120_ms.mp3" type="audio/mpeg">
+  <source src="https://github.com/Vericoware/lora_finetune_riffusion/blob/main/results/chunk_1_1_start_16998_ms_dur_5120_ms.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
 
